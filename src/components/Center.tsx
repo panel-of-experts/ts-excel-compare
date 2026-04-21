@@ -1,12 +1,14 @@
 import React from "react";
 import "antd/dist/antd.css";
-import { Button } from "antd";
+import { Button, Switch } from "antd";
 
 interface DiffBtn {
   btntext: string;
+  showReordered: boolean;
   onDiffBtnClick(e: React.MouseEvent<HTMLElement, MouseEvent>): any;
   onSampleBtnClick(e: React.MouseEvent<HTMLElement, MouseEvent>): any;
   onResetBtnClick(e: React.MouseEvent<HTMLElement, MouseEvent>): any;
+  onShowReorderedChange(checked: boolean): any;
 }
 
 const CenterHooks = (props: DiffBtn) => {
@@ -39,6 +41,15 @@ const CenterHooks = (props: DiffBtn) => {
       >
         {" << reset >> "}
       </Button>
+      <div style={{ marginTop: 16, fontSize: 12 }}>
+        <div>Reordered rows</div>
+        <Switch
+          checked={props.showReordered}
+          onChange={props.onShowReorderedChange}
+          size="small"
+          style={{ marginTop: 4 }}
+        />
+      </div>
     </div>
   );
 };

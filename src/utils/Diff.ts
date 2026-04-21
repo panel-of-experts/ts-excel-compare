@@ -1,6 +1,6 @@
 const daff = require("daff");
 
-export const diff = (left: [][], right: [][], ref: React.RefObject<any>) => {
+export const diff = (left: [][], right: [][], ref: React.RefObject<any>, showReordered: boolean = true) => {
   var instance = ref.current.hotInstance;
   var result = [];
   let tableLeft = new daff.TableView(left);
@@ -24,7 +24,9 @@ export const diff = (left: [][], right: [][], ref: React.RefObject<any>) => {
   td.hilite(output);
 
   if (output.height !== 0) {
-    result = output.data;
+    result = showReordered
+      ? output.data
+      : output.data.filter((row: any[]) => row[1] !== ":");
     instance.loadData(result);
   }
 };

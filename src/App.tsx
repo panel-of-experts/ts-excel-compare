@@ -31,6 +31,7 @@ function App() {
   const [rightWorkbook, setRightWorkbook] = useState<WorkBook>();
   const [diffBtnText] = useState(">> Diff <<");
   const [hotTableComponentDiffResult] = useState(React.createRef());
+  const [showReordered, setShowReordered] = useState(true);
 
   const leftFileSelectRef = useRef<any>(null);
   const rightFileSelectRef = useRef<any>(null);
@@ -119,8 +120,15 @@ function App() {
         <Col span={2}>
           <CenterHooks
             btntext={diffBtnText}
+            showReordered={showReordered}
+            onShowReorderedChange={(checked) => {
+              setShowReordered(checked);
+              if (hotTableComponentDiffResult.current) {
+                diff(leftsheetdata, rightsheetdata, hotTableComponentDiffResult, checked);
+              }
+            }}
             onDiffBtnClick={(e) => {
-              diff(leftsheetdata, rightsheetdata, hotTableComponentDiffResult);
+              diff(leftsheetdata, rightsheetdata, hotTableComponentDiffResult, showReordered);
             }}
             onSampleBtnClick={(e) => {
               setLeftSheetData(ExcelHelper.SampleDataLeft);
