@@ -1,0 +1,23 @@
+[Unit]                                                                             
+Description=BOM Diff Tool                                                          
+After=network.target                                                               
+                                                                                   
+[Service]
+Type=simple
+WorkingDirectory=/home/dsandall/newhome/ts-excel-compare
+ExecStart=/usr/bin/serve -s /home/dsandall/newhome/ts-excel-compare/build -l 80
+Restart=on-failure                                                                 
+RestartSec=5    
+Environment=NODE_OPTIONS=--openssl-legacy-provider                                 
+Environment=PORT=80
+Environment=BROWSER=none                                                           
+                
+[Install]
+WantedBy=multi-user.target
+  
+  
+  
+  
+  
+  
+  
